@@ -6,6 +6,10 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint('auth', __name__)
 
+#The functions contained in this file are login, logout, signup, and url shortener (added on 6/22)
+#url shortner function added (line 68), planning to add the option to the navbar upon user login
+
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -60,3 +64,27 @@ def sign_up():
             return redirect(url_for('views.home'))
 
     return render_template('sign_up.html', user=current_user)
+
+@auth.route('/url-shortener')
+@login_required #have the url shortener feature be available once they log in
+def url_shortener():
+
+    site = input(str())  # Have user put in the URL they want to shorten, not sure how to go about this
+    conn = http.client.HTTPSConnection("url-shortener-service.p.rapidapi.com")
+    payload = "url={}".format(site)
+
+    headers = {
+        'content-type': "application/x-www-form-urlencoded",
+        'X-RapidAPI-Key': "8981923446msh8c91295000d75e5p1e8de0jsn7c06af14c53a",
+        'X-RapidAPI-Host': "url-shortener-service.p.rapidapi.com"
+    }
+
+    conn.request("POST", "/shorten", payload, headers)
+
+    res = conn.getresponse()
+    data = res.read()
+    if data.decode("utf-8"):
+        flash('Shortened URL created!', category='success')
+        return data.decode("utf-8")
+    else:
+        pass
