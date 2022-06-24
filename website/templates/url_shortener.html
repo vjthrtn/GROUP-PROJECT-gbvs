@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}URL SHORTENER{% endblock %}
+
+{% block content %}
+<h1>URL Shortener</h1>
+<form method="POST">
+    <h3 align="center">Put the url you want to shorten here</h3>
+    <div class="form-group">
+        <label for="url">URL</label>
+        <input type="text"
+               class="form-control"
+               id="url"
+               name="url"
+               placeholder="Enter URL"
+        />
+    </div>
+    <br />
+    <button type="submit" value='Submit' class="btn btn-primary">Submit</button>
+</form>
+{% endblock%}

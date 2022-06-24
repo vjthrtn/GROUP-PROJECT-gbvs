@@ -66,26 +66,31 @@ def sign_up():
 
     return render_template('sign_up.html', user=current_user)
 
-@auth.route('/url-shortener')
+#"""
+@auth.route('/url_shortener', methods = ['POST', 'GET'])
 @login_required #have the url shortener feature be available once they log in
 def url_shortener():
+    if request.method == 'POST':
+        site = request.form.get('url')  # Have user put in the URL they want to shorten, not sure how to go about this
+        if site:
+            conn = http.client.HTTPSConnection("url-shortener-service.p.rapidapi.com")
+            payload = str(site)
 
-    site = input(str())  # Have user put in the URL they want to shorten, not sure how to go about this
-    conn = http.client.HTTPSConnection("url-shortener-service.p.rapidapi.com")
-    payload = "url={}".format(site)
+            headers = {
+                'content-type': "application/x-www-form-urlencoded",
+                'X-RapidAPI-Key': "8981923446msh8c91295000d75e5p1e8de0jsn7c06af14c53a",
+                'X-RapidAPI-Host': "url-shortener-service.p.rapidapi.com"
+            }
 
-    headers = {
-        'content-type': "application/x-www-form-urlencoded",
-        'X-RapidAPI-Key': "8981923446msh8c91295000d75e5p1e8de0jsn7c06af14c53a",
-        'X-RapidAPI-Host': "url-shortener-service.p.rapidapi.com"
-    }
+            conn.request("POST", "/shorten", payload, headers)
 
-    conn.request("POST", "/shorten", payload, headers)
+            res = conn.getresponse()
+            data = res.read()
+            if data.decode("utf-8"):
+                flash('Shortened URL created!', category='success')
+                return data.decode("utf-8")
+            else:
+                flash('Something went wrong!', category='error')
 
-    res = conn.getresponse()
-    data = res.read()
-    if data.decode("utf-8"):
-        flash('Shortened URL created!', category='success')
-        return data.decode("utf-8")
-    else:
-        pass
+    return render_template('url_shortener.html', user=current_user)
+#"""
