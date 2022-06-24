@@ -92,5 +92,5 @@ def url_shortener():
             else:
                 flash('Something went wrong!', category='error')
 
-    return render_template('url_shortener.html', user=current_user, url=site)
+    return render_template('url_shortener.html', user=current_user)
 #"""
