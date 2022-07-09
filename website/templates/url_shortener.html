@@ -48,12 +48,18 @@
             <br />
 
                 <input type="text" class="form-control" id="url"
-                       pattern="https://.*" name="url" placeholder="Enter URL" />
+                        name="url" placeholder="Enter URL" />
             </div>
             <br />
             <button type="submit" value='Submit' class="btn btn-primary">Submit</button>
         </form>
     </div>
+    <div>
+        {% if result %}
+            <p>Here is your link : {{ result }} </p>
+        {% endif %}
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

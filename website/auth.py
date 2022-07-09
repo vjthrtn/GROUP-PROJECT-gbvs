@@ -90,9 +90,10 @@ def url_shortener():
         print(site)
         print(payload)
         print(data.decode("utf-8"))
-        return data.decode("utf-8")
+        return render_template('url_shortener.html', result=data.decode("utf-8"), user=current_user )
+
     else:
-        return render_template('url_shortener.html', user=current_user)
+        return render_template('url_shortener.html', user=current_user, )
 
 
 #"""
