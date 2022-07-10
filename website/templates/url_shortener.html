@@ -11,9 +11,9 @@
 
     <title>{% block title %}Home{% endblock %}</title>
     <style>
-      .form-group {
-        width: 500px;
-      }
+        .form-group {
+            width: 500px;
+        }
     </style>
 </head>
 
@@ -41,22 +41,29 @@
     <div class="container">
         <h1>URL Shortener</h1>
         <form method="POST">
-            <br/>
-            <br/>
+            <br />
+            <br />
             <div class="form-group">
-            <h3 align="center">Put the url you want to shorten here</h3>
-            <br />
+                <h3>Put the url you want to shorten here</h3>
+                <br />
 
-                <input type="text" class="form-control" id="url"
-                        name="url" placeholder="Enter URL" />
+                <input type="text" class="form-control" id="url" name="url" placeholder="Enter URL" />
             </div>
-            <br />
             <button type="submit" value='Submit' class="btn btn-primary">Submit</button>
         </form>
     </div>
     <div>
         {% if result %}
-            <p>Here is your link : {{ result }} </p>
+        <div class="container">
+            <div class="form-group">
+                <br />
+                <h3>Here is your link : </h3>
+                <br />
+                <input type="text" class="form-control" id="urlResult" name="url" value="{{ result }}"placeholder="{{ result }}" readonly></inopu>
+                <br />
+                <button type="submit" value='Submit' class="btn btn-primary" onclick="copy()" >Copy text</button>
+            </div>
+        </div>
         {% endif %}
     </div>
 
