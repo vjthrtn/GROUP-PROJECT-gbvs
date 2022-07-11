@@ -7,10 +7,6 @@ import http.client
 
 auth = Blueprint('auth', __name__)
 
-#The functions contained in this file are login, logout, signup, and url shortener (added on 6/22)
-#url shortner function added (line 68), planning to add the option to the navbar upon user login
-
-
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -68,7 +64,7 @@ def sign_up():
 
 #"""
 @auth.route('/url_shortener', methods = ['POST', 'GET'])
-@login_required #have the url shortener feature be available once they log in
+#@login_required
 def url_shortener():
     if request.method == 'POST':
         site = request.form['url']
