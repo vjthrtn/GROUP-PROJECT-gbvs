@@ -44,6 +44,13 @@
       .url_shortener {
         padding-top: 10px;
       }
+      .url-shortener-icon {
+        width: 60px;
+        height: 50px;
+      }
+      .url_shortener:hover {
+        filter: brightness(50%)
+      }
     </style>
     <title>{% block title %}Home{% endblock %}</title>
 
@@ -74,7 +81,10 @@
 
     <nav class="sidebar navbar navbar-dark bg-dark">
       <div class="url_shortener">
-        <a class="nav-item nav-link" id="url-shortener" href="/url_shortener"><img src="/icons/url.jpg" class="sidebar-link"/>Url Shortener</a>
+        <a class="nav-item nav-link" id="url-shortener" href="/url_shortener">
+          <img class="url-shortener-icon" src="https://free-url-shortener.rb.gy/url-shortener.png">
+          <div>Url Shortener</div>
+        </a>
       </div>
     </nav>
 
