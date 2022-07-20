@@ -62,7 +62,6 @@ def sign_up():
 
     return render_template('sign_up.html', user=current_user)
 
-#"""
 @auth.route('/url_shortener', methods = ['POST', 'GET'])
 #@login_required
 def url_shortener():
@@ -97,5 +96,6 @@ def url_shortener():
     else:
         return render_template('url_shortener.html',user=current_user, )
 
-
-#"""
+@auth.route('/weather', methods = ['POST', 'GET'])
+def weather():
+    pass

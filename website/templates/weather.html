@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous" />
+
+    <style>
+      .form-group {
+        width: 500px;
+      }
+      .sidebar {
+        position: fixed;
+        left: 0px;
+        bottom: 0px;
+        top: 55px;
+        width: 72px;
+        z-index: 1;
+        justify-content: center;
+      }
+      .url_shortener {
+        padding-top: 10px;
+      }
+      .url-shortener-icon {
+        width: 60px;
+        height: 50px;
+      }
+      .url_shortener:hover {
+        filter: brightness(50%)
+      }
+    </style>
+
+    <title>Weather</title>
+
+  </head>
+
+  <body style="background-image: url('https://i.pinimg.com/originals/32/b8/77/32b877ed4aa7778cc7d43ebb7d95a6f1.png');
+  background-size:100%;">
+    <nav class="sidebar navbar navbar-dark bg-dark ">
+      <div class="url_shortener">
+        <a class="nav-item nav-link" id="url-shortener" href="/url_shortener">
+          <img class="url-shortener-icon" src="https://free-url-shortener.rb.gy/url-shortener.png">Url Shortener
+        </a>
+      </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        <div class="navbar-nav">
+          {% if user.is_authenticated %}
+          <a class="nav-item nav-link" id="home" href="/">Home</a>
+          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          {% else %}
+          <a class="nav-item nav-link" id="login" href="/login">Login</a>
+          <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+  <br />
+  <br />
+    Weather API Here
+  </body>
+</html>
