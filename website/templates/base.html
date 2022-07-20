@@ -87,6 +87,14 @@
         </a>
       </div>
     </nav>
+    <nav class="sidebar navbar navbar-dark bg-dark ">
+      <div class="weather">
+        <a class="nav-item nav-link" id="weather" href="/weather">
+          <img class="weather-icon" src="https://cdn3.iconfinder.com/data/icons/picons-weather/57/13_showers-512.png">
+          <div>Weather</div>
+        </a>
+      </div>
+    </nav>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
