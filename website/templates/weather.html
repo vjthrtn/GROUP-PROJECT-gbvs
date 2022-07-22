@@ -83,6 +83,34 @@
     </nav>
   <br />
   <br />
-    Weather API Here
+  <div class="container">
+    <h1>Weather</h1>
+    <form method="POST">
+        <br />
+        <br />
+        <div class="form-group">
+            <h3>Enter your city below</h3>
+            <br />
+
+            <input type="text" class="form-control" id="city" name="city" placeholder="Enter URL" />
+        </div>
+        <button type="submit" value='Submit' class="btn btn-primary">Submit</button>
+    </form>
+</div>
+  <div>
+    {% if result %}
+    <div class="container">
+        <div class="form-group">
+            <br />
+            <h3>The weather in {{ city }} currently is : </h3>
+            <br />
+            <h3>{{ result }}</h3>
+            <h3>{{ Faren }} F, {{ Celsius }} C</h3>
+            <br />
+            
+        </div>
+    </div>
+    {% endif %}
+</div>
   </body>
 </html>

@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 import http.client
+import requests
 
 auth = Blueprint('auth', __name__)
 
@@ -98,4 +99,16 @@ def url_shortener():
 
 @auth.route('/weather', methods = ['POST', 'GET'])
 def weather():
-    pass
+    
+    if request.method == 'POST':
+        city = request.form['city']
+        response = requests.get("http://api.weatherapi.com/v1/current.json?key=d611d4fc42174c24ba6222614222207&q="+city+"&aqi=no")
+        data = response.json()
+        weatherDesc = data["current"]["condition"]["text"]
+        f = data["current"]["temp_c"]
+        c = data["current"]["temp_f"]
+        
+        return render_template('weather.html', result = weatherDesc, city = city, Faren=f, Celsius = c, user=current_user )
+
+    else:
+        return render_template('weather.html',user=current_user, )
