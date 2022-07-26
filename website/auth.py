@@ -99,16 +99,22 @@ def url_shortener():
 
 @auth.route('/weather', methods = ['POST', 'GET'])
 def weather():
-    
     if request.method == 'POST':
-        city = request.form['city']
-        response = requests.get("http://api.weatherapi.com/v1/current.json?key=d611d4fc42174c24ba6222614222207&q="+city+"&aqi=no")
-        data = response.json()
-        weatherDesc = data["current"]["condition"]["text"]
-        f = data["current"]["temp_c"]
-        c = data["current"]["temp_f"]
-        
-        return render_template('weather.html', result = weatherDesc, city = city, Faren=f, Celsius = c, user=current_user )
+        try:
+            city = request.form['city']
+            response = requests.get("http://api.weatherapi.com/v1/current.json?key=d611d4fc42174c24ba6222614222207&q="+city+"&aqi=no")
+            data = response.json()
+            print(data)
+            weatherDesc = data["current"]["condition"]["text"]
+            c = data["current"]["temp_c"]
+            f = data["current"]["temp_f"]
+            t = data["location"]["localtime"]
+            n = data["location"]["name"]
+            i = data["current"]["condition"]["icon"]
+            return render_template('weather.html', name=n, icon=i, result = weatherDesc, city = city, Faren=f, Celsius = c, time=t, user=current_user )
+        except:
+            e = "Could not find the location."
+            return render_template('weather.html', exception=e, user=current_user, )
 
     else:
         return render_template('weather.html',user=current_user, )
