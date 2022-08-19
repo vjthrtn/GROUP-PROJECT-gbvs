@@ -118,3 +118,18 @@ def weather():
 
     else:
         return render_template('weather.html',user=current_user, )
+
+@auth.route('/airport', methods = ['POST', 'GET'])
+def weather():
+    if request.method == 'POST':
+        try:
+            airport = request.form['aiport']
+            response = requests.get("http://api.weatherapi.com/v1/current.json?key=d611d4fc42174c24ba6222614222207&q="+city+"&aqi=no")
+            data = response.json()
+            return render_template('airport.html', user=current_user )
+        except:
+            e = "Could not find the Airport."
+            return render_template('airport.html', exception=e, user=current_user, )
+
+    else:
+        return render_template('weather.html',user=current_user, )       
