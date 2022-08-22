@@ -5,6 +5,7 @@ from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 import http.client
 import requests
+from datetime import datetime
 
 auth = Blueprint('auth', __name__)
 
@@ -123,13 +124,24 @@ def weather():
 def airport():
     if request.method == 'POST':
         try:
-            airport = request.form['aiport']
-            response = requests.get("http://api.weatherapi.com/v1/current.json?key=d611d4fc42174c24ba6222614222207&q="+city+"&aqi=no")
-            data = response.json()
-            return render_template('airport.html', user=current_user )
+            flight = request.form['flight']
+            url = "https://aerodatabox.p.rapidapi.com/flights/number/"+flight+"/"+datetime.today().strftime('%Y-%m-%d')
+
+            headers = {
+	            "X-RapidAPI-Key": "4f7204b4b8msh50c3cb1938ff82dp14fe0djsnc498505be373",
+	            "X-RapidAPI-Host": "aerodatabox.p.rapidapi.com"
+            }
+
+            data = requests.request("GET", url, headers=headers)
+            data = data.json()
+            departAirport = data[0]["departure"]["airport"]["shortName"]
+            arriveAirport = data[0]["arrival"]["airport"]["shortName"]
+            #print(departAirport)
+            #print(arriveAirport)
+            return render_template('airport.html', arrive=arriveAirport, depart=departAirport, user=current_user )
         except:
-            e = "Could not find the Airport."
+            e = "Could not find the specified flight."
             return render_template('airport.html', exception=e, user=current_user, )
 
     else:
-        return render_template('weather.html',user=current_user, )       
+        return render_template('airport.html',user=current_user, )       
