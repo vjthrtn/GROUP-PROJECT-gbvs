@@ -120,7 +120,7 @@ def weather():
         return render_template('weather.html',user=current_user, )
 
 @auth.route('/airport', methods = ['POST', 'GET'])
-def weather():
+def airport():
     if request.method == 'POST':
         try:
             airport = request.form['aiport']
